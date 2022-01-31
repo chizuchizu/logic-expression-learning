@@ -42,7 +42,7 @@ def get_mushroom(n_samples, cfg):
     # if cfg.use_mushroom_columns:
     y_data = dataset.iloc[:, 0].values.astype("float64")
 
-    return x_data, y_data
+    return x_data, y_data, dataset.columns
 
 def get_car_evaluation(n_samples, cfg):
     dataset = pd.read_csv("../dataset/car_evaluation.csv", header=None)
@@ -73,7 +73,7 @@ def get_car_evaluation(n_samples, cfg):
     # if cfg.use_mushroom_columns:
     y_data = dataset.iloc[:, 0].values.astype("float64")
 
-    return x_data, y_data
+    return x_data, y_data, dataset.columns
 
 def get_golf():
     dataset = pd.read_csv("../dataset/golf_df.csv")
@@ -99,5 +99,5 @@ def get_golf():
     # if cfg.use_mushroom_columns:
     y_data = dataset.iloc[:, 0].values.astype("float64")
 
-    return x_data, y_data
+    return x_data, y_data, dataset.columns
 
