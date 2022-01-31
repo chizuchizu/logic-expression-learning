@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "logic-expression-learning"
+version = "0.1.0"
+description = ""
+authors = ["Ochi Yuma <ochiyuma.ochi@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9, <3.10"
+amplify = "^0.6.5"
+tqdm = "^4.62.3"
+joblib = "^1.1.0"
+loguru = "^0.6.0"
+scikit-learn = "^1.0.2"
+pandas = "^1.4.0"
+omegaconf = "^2.1.1"
+matplotlib = "^3.5.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

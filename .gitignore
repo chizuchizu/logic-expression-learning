@@ -1,0 +1,4 @@
+.idea
+dataset/*
+logic_expression_learning/ex-*.py
+logic_expression_learning/__pycache__
