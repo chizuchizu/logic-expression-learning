@@ -30,11 +30,14 @@ def load_file(filename: str, n_samples: int) -> Tuple[np.ndarray, np.ndarray]:
         axis=1
     )
 
+    columns = [*range(x_data.shape[1])]
+    columns += [f"Not {x}" for x in columns]
+
     use_idx = np.random.choice(x_data.shape[0], n_samples)
     x_data = x_data[use_idx, :]
     y_data = y_data[use_idx].astype(float)
 
-    return x_data, y_data
+    return x_data, y_data, columns
 
 
 if __name__ == "__main__":
