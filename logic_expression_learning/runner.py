@@ -333,8 +333,8 @@ class SingleRunner:
             if comb:
                 print(self.combs_fea[i])
         self.expression = logical_eqs
-        self.write_metric(client_result, result)
-        return logical_eqs
+        metrics = self.write_metric(client_result, result)
+        return logical_eqs, metrics
 
     def predict(self, dataset):
         prediction = np.array(predict(dataset, self.expression, self.combs_fea))
@@ -362,3 +362,5 @@ class SingleRunner:
         }
 
         logger.info(f"{metrics}")
+
+        return metrics
