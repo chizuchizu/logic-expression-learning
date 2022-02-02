@@ -76,7 +76,7 @@ def get_car_evaluation(n_samples, cfg):
     return x_data, y_data, dataset.columns
 
 def get_golf():
-    dataset = pd.read_csv("../dataset/golf_df.csv")
+    dataset = pd.read_csv("../../LogicTreeStreamlit/src/dataset/golf_df.csv")
 
     dataset = pd.get_dummies(dataset)
 
@@ -99,5 +99,5 @@ def get_golf():
     # if cfg.use_mushroom_columns:
     y_data = dataset.iloc[:, 0].values.astype("float64")
 
-    return x_data, y_data, dataset.columns
+    return x_data, y_data, dataset.iloc[:, 2:].columns
 

@@ -45,7 +45,7 @@ class FeatureSelection:
         use_combs_fea = []
         last_score = 0
         for idx, (score, combs) in enumerate(results):
-            if last_score != score:
+            # if last_score != score:
                 use_combs_fea.append(combs)
                 last_score = score
                 if len(use_combs_fea) == num_selection:
