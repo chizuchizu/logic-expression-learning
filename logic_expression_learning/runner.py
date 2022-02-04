@@ -84,8 +84,8 @@ class Runner:
 
         # model_quadratic: amplify.BinaryQuadraticModel = model_constraints + sum(
         #    self.bweight_is_use_members) * self.norm_weight * self.num_rows
-        norm_constraint_1 = less_equal(sum(self.bweight_is_use_members),
-                                       self.max_combs) * self.norm_weight  # / self.num_rows * 1600
+        # norm_constraint = less_equal(sum(self.bweight_is_use_members),
+        #                               self.max_combs) * self.norm_weight  # / self.num_rows * 1600
         norm_constraint = penalty(sum(self.bweight_is_use_members), le=self.max_combs) * self.norm_weight
         # model_quadratic = model_constraints + norm_constraint + self.b_symbol_gen.array(1)[
         #     0]  # +sum(self.bweight_is_use_members)
