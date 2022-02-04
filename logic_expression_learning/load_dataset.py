@@ -1,5 +1,5 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 
 import load_LIBSVM
 
@@ -14,13 +14,13 @@ def get_data(
     elif dataset_name == "car_evaluation":
         return get_car_evaluation(n_samples, cfg)
     elif dataset_name == "golf":
-        return get_golf()
+        return get_golf(cfg)
     else:
-        return load_LIBSVM.load_file(dataset_name, n_samples)
+        return load_LIBSVM.load_file(dataset_name, n_samples, cfg.dataset_path)
 
 
 def get_mushroom(n_samples, cfg):
-    dataset = pd.read_csv("../../LogicTreeStreamlit/src/dataset/mushrooms.csv")
+    dataset = pd.read_csv(f"{cfg.dataset_path}/mushrooms.csv")
     dataset = pd.get_dummies(dataset)
     dataset = dataset.sample(n=n_samples, random_state=cfg.seed)
 
@@ -44,8 +44,9 @@ def get_mushroom(n_samples, cfg):
 
     return x_data, y_data, dataset.columns
 
+
 def get_car_evaluation(n_samples, cfg):
-    dataset = pd.read_csv("../dataset/car_evaluation.csv", header=None)
+    dataset = pd.read_csv(f"{cfg.dataset_path}/car_evaluation.csv", header=None)
     dataset.columns = ["buying", "maint", "doors", "persons", "lug_boot", "safety", "class"]
 
     dataset = dataset.loc[:, dataset.columns[::-1]]
@@ -75,8 +76,9 @@ def get_car_evaluation(n_samples, cfg):
 
     return x_data, y_data, dataset.columns
 
-def get_golf():
-    dataset = pd.read_csv("../../LogicTreeStreamlit/src/dataset/golf_df.csv")
+
+def get_golf(cfg):
+    dataset = pd.read_csv(f"{cfg.dataset_path}/golf_df.csv")
 
     dataset = pd.get_dummies(dataset)
 
@@ -100,4 +102,3 @@ def get_golf():
     y_data = dataset.iloc[:, 0].values.astype("float64")
 
     return x_data, y_data, dataset.iloc[:, 2:].columns
-
