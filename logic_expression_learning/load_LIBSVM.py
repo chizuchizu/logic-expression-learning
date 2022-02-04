@@ -25,13 +25,14 @@ def load_file(filename: str, n_samples: int, dataset_path: str) -> Tuple[np.ndar
     x_data, y_data = get_data(f"../dataset/{filename}")
     y_data = np.where(y_data == 1, 1, 0)
 
+    columns = [*range(x_data.shape[1])]
+    columns += [f"Not {x}" for x in columns]
+
     x_data = np.concatenate(
         [x_data, 1 - x_data],
         axis=1
     )
 
-    columns = [*range(x_data.shape[1])]
-    columns += [f"Not {x}" for x in columns]
 
     use_idx = np.random.choice(x_data.shape[0], n_samples)
     x_data = x_data[use_idx, :]
