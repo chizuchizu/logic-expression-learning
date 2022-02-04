@@ -48,6 +48,8 @@ class Runner:
         self.bweight_is_use_members = self.b_symbol_gen.array(self.length_combs)
         self.num_all_bit = self.length_combs
 
+        self.num_logical_bits = None
+
     def build_logical_model(self) -> amplify.BinaryQuadraticModel:
         model_constraints: amplify.BinaryConstraint = 0
 
@@ -112,6 +114,9 @@ class Runner:
     def solve(self) -> Tuple:
         penalties = self.build_logical_model()
         print(penalties.num_logical_vars)
+
+        self.num_logical_bits = penalties.num_logical_vars
+
         result: amplify.SolverResult = self.solver.solve(penalties)[0]
         client_result: amplify.client.FixstarsClientResult = self.solver.client_result
 
@@ -333,7 +338,7 @@ class SingleRunner:
             if comb:
                 print(self.combs_fea[i])
         self.expression = logical_eqs
-        metrics = self.write_metric(client_result, result)
+        metrics = self.write_metric(client_result, result, runner)
         return logical_eqs, metrics
 
     def predict(self, dataset):
@@ -352,12 +357,14 @@ class SingleRunner:
     def write_metric(
             self,
             client_result,
-            result
+            result,
+            runner
     ):
         metrics = {
             "AnnealingTime": client_result.annealing_time_ms,
             "Energy": result.energy,
             "NumIterations": client_result.execution_parameters.num_iterations,
+            "NumLogicalBits": runner.num_logical_bits,
             "TrainAUC": self.get_auc_score(self.train_dataset, self.train_target),
         }
 
