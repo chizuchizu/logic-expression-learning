@@ -42,7 +42,7 @@ def get_mushroom(n_samples, cfg):
     # if cfg.use_mushroom_columns:
     y_data = dataset.iloc[:, 0].values.astype("float64")
 
-    return x_data, y_data, dataset.columns
+    return x_data, y_data, dataset.columns[2:]
 
 
 def get_car_evaluation(n_samples, cfg):
